@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: environment_variables
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+    - name: compnay
+      value: "infosys"
+    - name: employee
+      value: "mohansai"
+
+
+
+#once the environment_variables pod is created then login/connect to that pod and then check the details by giving env
+# kubectl apply -f 06-env.yaml
+# kubectl exec -it environment_variables -- bash
+# then, env

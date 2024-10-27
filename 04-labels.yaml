@@ -10,3 +10,6 @@ spec:
   containers:
   - name: nginx
     image: nginx
+
+
+#kubectl describe pod labels ----> in this, these labels will be there.

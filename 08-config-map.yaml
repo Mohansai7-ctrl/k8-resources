@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  technology: "devops"
+  cloud: "aws"
+
+
+
+# kubectl apply -f 08-config-map.yaml
+# kubectl get configmap
+# kubectl describe configmap nginx-config
+
+# can also edit this from cli:
+# kubectl edit configmap nginx-config

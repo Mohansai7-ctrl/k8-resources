@@ -1,0 +1,43 @@
+#Below env variables, values are taking from reference 08-config-map.yaml using configMap name that is nginx-config
+
+
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod-config
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+    - name: technology
+      valueFrom:
+        configMapKeyRef:
+          name: nginx-config #name of the configMap
+          key: technology  #Here this confgiMap key and env.key both need not be same, can be different
+    - name: cloud-platform
+      valueFrom:
+        configMapKeyRef:
+          name: nginx-config
+          key: cloud
+
+
+#Below all env variables are taking from reference 08-config-map.yaml using configMap name that is nginx-config
+
+# apiVersion: v1
+# kind: Pod
+# metadata: 
+#   name: pod-config
+# spec:
+#   containers:
+#   - name: nginx
+#     image: nginx
+#     envFrom:
+#     - configMapRef:
+#         name: nginx-config
+
+
+
+# kubectl apply -f 09-pod-config.yaml
+# kubectl get pods or kubectl get pod
+# kubectl exec -it pod-config -- bash
