@@ -13,3 +13,7 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 80
+
+
+#load balancer will get the cluster IP and nodeport automatically.
+# As it is load balancer, it will get dns name as well, using that we can fetch from external browsers
