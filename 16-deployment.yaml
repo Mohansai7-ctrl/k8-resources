@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
-metadate: 
+metadata: 
   name: nginx-deployment
-  lables:
+  labels:
     app: nginx
     tier: frontend
 spec:
