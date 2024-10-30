@@ -18,8 +18,23 @@ spec:
         app: nginx
         tier: frontend
     spec:
-    containers:
-    - name: nginx
-      image: nginx
+      containers:
+      - name: nginx
+        image: nginx
       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-svc-nginx 
+spec:
+  selector:
+    app: nginx
+    tier: frontend
+  ports:
+  - name: deployment-svc-port
+    protocol: TCP
+    port: 80
+    targetPort: 80
+
 
