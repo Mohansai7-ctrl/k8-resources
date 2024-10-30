@@ -19,11 +19,11 @@ spec:
         tier: frontend
     spec:
       containers:
-      # - name: nginx
-      #   #image: nginx
-      #   image: nginx:stable-perl
-      - name: almalinux
-        image: almalinux:9.0
+      - name: nginx
+        #image: nginx
+        image: nginx:stable-perl   #if version changes from empty to stable-perl, then it will restart the pods to get the new version
+        #if entire image changes, then it will create new replicaset under which new pods with new image will be created then old image pods in old replicaset will be deleted, but still old replicaset will be there for rolling back purpose,
+      
 
       
 ---
