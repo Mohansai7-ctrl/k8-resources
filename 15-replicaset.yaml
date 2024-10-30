@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx  #replicaset cannot update the image, once the pods were created initially with provided image, if version is changed then it cant update the pods again
-        #image: nginx:stable-perl
+        #image: nginx  #replicaset cannot update the image, once the pods were created initially with provided image, if version is changed then it cant update the pods again
+        image: nginx:stable-perl
 
 #Above will create 3 pods ----> node-<random_hash>, if one pod is deleted, then replicaset make sure to create other pod so that it can match with replicas configured in this yaml file
 # kubectl delete pd <pod_name>
