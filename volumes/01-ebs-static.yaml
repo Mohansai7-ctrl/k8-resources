@@ -22,7 +22,7 @@ spec:
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle:    #need to give the volume id of created one with 20Gi created in aws EBS Volume
+    volumeHandle: vol-025b78c9f3012f7d7   #need to give the volume id of created one with 20Gi created in aws EBS Volume
 
 ---
 
