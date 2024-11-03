@@ -2,7 +2,7 @@
 
 #1)PVC Creation:
 apiVersion: v1
-kind: persistentVolumeClaim
+kind: PersistentVolumeClaim
 metadata:
   name: ebs-dynamic
 spec:

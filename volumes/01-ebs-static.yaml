@@ -82,3 +82,53 @@ spec:
     port: 80  #Service Port
     targetPort: 80  #Container Port
     nodePort: 30007   #we need to opent he custom ip of port 30007 on sg
+
+
+# first create volume with 20Gi and update that in this yaml file.
+# update the topology.kubernetes.io/zone :   ----> this should be same where 3 nodes are created in the cluster(aws ec2)
+# then allow 30007 on ec2 (nodes) sg inbound rule, also attach policy of ebs csi driver policy in IAM Role
+# then install ebs csi driver
+# 75  03/11/24 14:09:48 kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.36"
+#    76  03/11/24 14:09:53 kubectl apply -f 01-ebs-static.yaml
+#    77  03/11/24 14:10:09 exit
+#    78  03/11/24 14:10:25 cd k8-resources/volumes/
+#    79  03/11/24 14:10:26 clear
+#    80  03/11/24 14:10:38 kubectl get csidriver
+#    81  03/11/24 14:11:00 kubectl apply -f 01-ebs-static.yaml
+#    82  03/11/24 14:10:25 cd k8-resources/volumes/
+#    83  03/11/24 14:10:26 clear
+#    84  03/11/24 14:10:38 kubectl get csidriver
+#    85  03/11/24 14:11:00 kubectl apply -f 01-ebs-static.yaml
+#    86  03/11/24 14:13:47 exit
+#    87  03/11/24 14:14:19 cd k8-resources/volumes/
+#    88  03/11/24 14:14:21 clear
+#    89  03/11/24 14:14:26 kubectl get pv,pvc
+#    90  03/11/24 14:14:32 kubectl get sc
+#    91  03/11/24 14:14:41 kubectl get csidrivers
+#    92  03/11/24 14:14:49 kubectl apply -f 01-ebs-static.yaml
+#    93  03/11/24 14:14:59 kubectl get pv
+#    94  03/11/24 14:15:07 kubectl get pod
+#    95  03/11/24 14:15:14 kubectl get svc
+#    96  03/11/24 14:17:06 git pull
+#    97  03/11/24 14:17:16 kubectl apply -f 01-ebs-static.yaml
+#    98  03/11/24 14:19:52 git pull
+#    99  03/11/24 14:20:02 kubectl apply -f 01-ebs-static.yaml
+#   100  03/11/24 14:22:52 cd ../
+#   101  03/11/24 14:22:57 git pull
+#   102  03/11/24 14:23:00 cd volumes/
+#   103  03/11/24 14:23:02 clear
+#   104  03/11/24 14:23:08 kubectl get pv
+#   105  03/11/24 14:23:12 kubectl get pvc
+#   106  03/11/24 14:23:22 kubectl get pv,pvc
+#   107  03/11/24 14:23:32 kubectl get pv,pvc,svc,sc
+#   108  03/11/24 14:28:18 kubectl get pods
+#   109  03/11/24 14:28:47 kubectl exec -it ebs-static -- bash
+#   110  03/11/24 14:33:06 kubectl delete pod ebs-static
+#   111  03/11/24 14:33:53 kubectl get pods
+#   112  03/11/24 14:34:51 kubectl apply -f 01-ebs-static.yaml
+#   113  03/11/24 14:34:56 kubectl get pods
+#   114  03/11/24 14:35:09 kubectl exec -it ebs-static -- bash
+
+
+# deletion:
+# as this storage/volume is outside of cluster, first delete the volume and then only delete the entire cluster(3 nodes - k8-eksctl)
