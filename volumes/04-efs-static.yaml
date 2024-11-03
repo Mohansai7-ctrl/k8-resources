@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: 5Gi
   csi:
-    driver: ebs.csi.aws.com
+    driver: efs.csi.aws.com
     volumeHandle: fs-0cd214372f1d9df6d  #efs File System name created in aws efs
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
