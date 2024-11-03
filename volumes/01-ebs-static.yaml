@@ -32,7 +32,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: ebs-static
 spec:
-  accessModes: ReadWriteOnce
+  accessModes: [ "ReadWriteOnce" ]
+  # accessModes:
+  #   - ReadWriteOnce
   storageClassName: ""  #it must be empty for static provisioning, otherwise default one will be used to bound the pvc with pv
   volumeName: ebs-static
   resources:
