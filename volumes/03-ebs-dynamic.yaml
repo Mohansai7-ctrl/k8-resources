@@ -22,7 +22,7 @@ metadata:
     purpose: ebs-dynamic
 spec:
   nodeSelector:
-    topology.kubernets.io/zone: us-east-1f
+    topology.kubernetes.io/zone: us-east-1f
   
   containers:
   - name: nginx
