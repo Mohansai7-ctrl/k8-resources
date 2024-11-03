@@ -1,3 +1,5 @@
+
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -55,6 +57,17 @@ spec:
 # allow efs csi driver policy in iam role
 # create pv for static and pvc for static and only pvc for dynamic keeping filesystem alive, unlike deleting(not required) in ebs dynamic provisioning
 # pod and service creation
+
+
+# root@efs-dynamic:/# nslookup nginx
+# ;; Got recursion not available from 10.100.0.10
+# Server:         10.100.0.10
+# Address:        10.100.0.10#53
+
+# Name:   nginx.default.svc.cluster.local
+# Address: 10.100.9.162
+# ;; Got recursion not available from 10.100.0.10
+
 
 #  349  03/11/24 16:17:45 kubectl kustomize     "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-2.1" > public-ecr-driver.yaml
 #   350  03/11/24 16:18:02 ls -la

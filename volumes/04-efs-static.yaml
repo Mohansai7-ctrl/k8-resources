@@ -1,5 +1,19 @@
+# steps:
+# create efs filesystem and update this id in volumeHandle in static and fileSystemId in efs-sc.yaml
+# install efs csi drivers and then in that default sg allow 2049 port nfs from ec2 instance sg grps
+# in ec2 instance sg grp, open 30007 nodePort for all traffic
+# allow efs csi driver policy in iam role
+# create pv for static and pvc for static and only pvc for dynamic keeping filesystem alive, unlike deleting(not required) in ebs dynamic provisioning
+# pod and service creation
 #efs csi driver:
 # https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes
+
+# #installing efs-csi driver:
+# kubectl kustomize \
+#     "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-2.1" > public-ecr-driver.yaml
+
+# after running the above command, apply as:
+# kubectl apply -f public-ecr-driver.yaml ,, then efs csi drivers will be created and installed successfully 
 
 #1) PV Creation
 apiVersion: v1
