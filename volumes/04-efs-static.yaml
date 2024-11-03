@@ -12,12 +12,12 @@ spec:
     storage: 5Gi
   csi:
     driver: ebs.csi.aws.com
-    volumeHandle:   #efs File System name created in aws efs
+    volumeHandle: fs-0cd214372f1d9df6d  #efs File System name created in aws efs
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
 ---
-#2) pvc creation:
+#2) pvc creation: 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
