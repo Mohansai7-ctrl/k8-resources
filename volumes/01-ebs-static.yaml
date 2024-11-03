@@ -1,0 +1,81 @@
+#ebs csi driver:
+# static provisioning csi:
+# https://github.com/kubernetes-sigs/aws-ebs-csi-driver/tree/master/examples/kubernetes/static-provisioning
+
+# pv, pvc and pod:
+# https://github.com/kubernetes-sigs/aws-ebs-csi-driver/tree/master/examples/kubernetes/static-provisioning/manifests
+
+# how volume is connected or used, from to to
+# pvc -> pv -> pod -> service
+
+#1) PV Creation:
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-static
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 20Gi
+  csi:
+    driver: ebs.csi.aws.com
+    fsType: ext4
+    volumeHandle:    #need to give the volume id of created one with 20Gi created in aws EBS Volume
+
+---
+
+#2) pvc creation to claim the pv by pod:
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-static
+spec:
+  accessModes: ReadWriteOnce
+  storageClassName: ""  #it must be empty for static provisioning, otherwise default one will be used to bound the pvc with pv
+  volumeName: ebs-static
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+#3) pod creation 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-static
+  labels:
+    purpose: ebs-static
+spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1d
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: ebs-static
+    persistentVolumeClaim:
+      claimName: ebs-static
+
+
+---
+
+#Service for pods
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc-port
+spec:
+  selector:
+    purpose: ebs-static
+  type: LoadBalancer
+  ports:
+  - name: ebs-static
+    protocol: TCP
+    port: 80  #Service Port
+    targetPort: 80  #Container Port
+    nodePort: 30007   #we need to opent he custom ip of port 30007 on sg

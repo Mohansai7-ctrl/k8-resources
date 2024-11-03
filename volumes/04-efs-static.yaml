@@ -1,0 +1,71 @@
+#efs csi driver:
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes
+
+#1) PV Creation
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-static
+spec:
+  accessModes: ReadWriteMany
+  capacity:
+    storage: 5Gi
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle:   #efs File System name created in aws efs
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+---
+#2) pvc creation:
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 3Gi
+
+---
+#3) pod creation:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-static
+  labels:
+    purpose: efs-static
+spec:
+  
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: efs-static
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: efs-static
+    persistentVolumeClaim:
+      claimName: efs-static
+    
+---
+#4)service creation for the pod:
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  selector:
+    purpose: efs-static
+  type: LoadBalancer
+  ports:
+  - name: nginx-svc-port
+    protocol: TCP
+    port: 80   #service Port
+    targetPort: 80  #ContainerPort
+    nodePort: 30007   # Worker Node
+
+    
