@@ -9,4 +9,4 @@ parameters:
   provisioningMode: efs-ap
   directoryPerms: "700"
   basePath: "/expense"
-  fileSystemId: fs-0cd214372f1d9df6d
+  fileSystemId: fs-0a9fdcb2595138329

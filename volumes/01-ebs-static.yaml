@@ -8,6 +8,11 @@
 # how volume is connected or used, from to to
 # pvc -> pv -> pod -> service
 
+
+# ebs csi driver:
+# kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.36"
+
+
 #1) PV Creation:
 
 apiVersion: v1
