@@ -54,3 +54,22 @@ spec:
     targetPort: 80  #ContainerPort
     nodePort: 30007   # Worker Node
 
+
+
+
+# 123  03/11/24 14:45:33 kubectl apply -f 02-ebs-sc.yaml
+#   124  03/11/24 14:45:40 kubectl get sc
+#   125  03/11/24 14:46:25 kubectl apply -f 03-ebs-dynamic.yaml
+#   126  03/11/24 14:48:57 git pull
+#   127  03/11/24 14:49:08 kubectl apply -f 03-ebs-dynamic.yaml
+#   128  03/11/24 14:49:16 kubectl get pv,pvc
+#   129  03/11/24 14:50:24 kubectl describe pvc persistentvolumeclaim/ebs-dynamic
+#   130  03/11/24 14:52:21 git pull
+#   131  03/11/24 14:52:31 kubectl apply -f 03-ebs-dynamic.yaml
+#   132  03/11/24 14:53:05 kubectl get pv,pvc
+#   133  03/11/24 14:53:17 kubectl delete -f 03-ebs-dynamic.yaml
+#   134  03/11/24 14:53:48 kubectl apply -f 03-ebs-dynamic.yaml
+#   135  03/11/24 14:53:57 kubectl get pvc
+#   136  03/11/24 14:54:53 kubectl get pods
+#   137  03/11/24 14:56:09 kubectl exec -it ebs-dynamic -- bash
+#   138  03/11/24 14:58:06 kubectl delete -f 03-ebs-dynamic.yaml
