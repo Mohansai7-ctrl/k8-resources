@@ -8,13 +8,13 @@ metadata:
 spec:
   replicas: 3
   selector:
-    matchLabels:  #by using these labels to select the pods to create replicas
+    matchLabels:  #by using these labels to select the pods to create replicas, The ReplicaSet/Deployment uses labels (app: nginx, tier: frontend) to select and manage its Pods. so that pods will be created having these lables so that ReplicaSet/Deployment can identifies the pods with these labels to manage them.
       app: nginx 
       tier: frontend
   template:
     metadata:
       name: nginx
-      labels:   # these labels belongs to pod
+      labels:   # these labels belongs to pod, shoulde match with selector matchLabels.
         app: nginx
         tier: frontend
     spec:
